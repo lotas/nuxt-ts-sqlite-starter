@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# sqlite db
+data/*.sqlite3

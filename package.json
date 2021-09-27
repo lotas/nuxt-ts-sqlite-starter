@@ -23,7 +23,9 @@
     "core-js": "^3.18.1",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
+    "knex": "^0.95.11",
     "nuxt": "^2.15.7",
+    "sqlite3": "^5.0.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {

@@ -3,6 +3,7 @@ import helmet from 'helmet'
 import logger from './utils/logger'
 
 import health from './routes/health'
+import users from './routes/users'
 
 const server = express()
 
@@ -26,6 +27,7 @@ server.use(
 )
 
 server.use('/health', health)
+server.use('/users', users)
 
 server.use(
   (
