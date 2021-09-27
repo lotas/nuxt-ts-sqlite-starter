@@ -24,7 +24,12 @@ help:
 		} \
 		{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
-## Create DB
-init-db:
+## Run migrations / Init db
+db-migrate:
 		@echo "Initializing database"
-		@cat data/init.sql | sqlite3 data/db.sqlite3
+		npm run knex migrate:up
+
+## Rollback last migration
+db-rollback:
+		@echo "Rollback db"
+		npm run knex migrate:rollback

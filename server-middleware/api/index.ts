@@ -1,9 +1,12 @@
-import express from 'express'
+import express, { Router } from 'express'
 import helmet from 'helmet'
+import controllers from './controllers'
 import logger from './utils/logger'
 
-import health from './routes/health'
-import users from './routes/users'
+const availableRoutesString = (router: Router) => router.stack
+  .filter(r => r.route)
+  .map(r => Object.keys(r.route.methods)[0].toUpperCase().padEnd(7) + r.route.path)
+  .join('\n  ')
 
 const server = express()
 
@@ -26,8 +29,10 @@ server.use(
   }
 )
 
-server.use('/health', health)
-server.use('/users', users)
+controllers.forEach(controller => {
+  server.use(controller.router)
+  logger.info(availableRoutesString(controller.router))
+})
 
 server.use(
   (

@@ -5,9 +5,6 @@ const DB_FILE = path.join(__dirname, '../../../data/db.sqlite3')
 
 export default class DbService {
   private db: Knex
-  private users: () => Knex.QueryBuilder
-
-  private maxRows = 100
 
   public constructor() {
     this.db = knex({
@@ -16,28 +13,22 @@ export default class DbService {
         filename: DB_FILE,
       },
       useNullAsDefault: true,
+      migrations: {
+        tableName: '_migrations'
+      }
     })
-    this.users = () => this.db('users')
   }
 
-  public async listOfUsers() {
-    const qb = this.users()
-    const data = await qb.select()
-
-    return {
-      data,
-      pagination: {
-        total: data.length,
-      },
-    }
+  public getQueryBuilder(table: string): Knex.QueryBuilder {
+    return this.db(table)
   }
 
-  public async getUserById(id: string) {
-    const qb = this.users().where('id', id).limit(1)
+  public async one(table: string, id: string, idKey = 'id') {
+    const qb = this.db(table).where(idKey, id).limit(1)
 
-    const user = await qb.select()
-    return Array.isArray(user) && user.length === 1
-      ? user[0]
+    const row = await qb.select()
+    return Array.isArray(row) && row.length === 1
+      ? row[0]
       : null
   }
 }
