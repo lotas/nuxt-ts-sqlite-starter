@@ -29,6 +29,11 @@ db-migrate:
 		@echo "Initializing database"
 		npm run knex migrate:up
 
+## Create new migration
+db-migrate:
+		@echo "Create new migration"
+		npm run knex migrate:make new
+
 ## Rollback last migration
 db-rollback:
 		@echo "Rollback db"

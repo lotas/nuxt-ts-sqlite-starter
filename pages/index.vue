@@ -1,9 +1,17 @@
 <template>
-  <Tutorial/>
+  <div>
+    Server status: <code class="border text-xs">{{ apiHealth }}</code>
+  </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+export default {
+  async asyncData(ctx) {
+    const apiHealth = await ctx.$axios.$get('/api/health')
 
-export default Vue.extend({})
+    return {
+      apiHealth
+    }
+  }
+}
 </script>
