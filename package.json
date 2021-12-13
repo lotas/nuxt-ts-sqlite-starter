@@ -21,7 +21,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.18.2",
+    "core-js": "^3.19.3",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "knex": "^0.95.11",
